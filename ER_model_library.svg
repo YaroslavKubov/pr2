@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1050" viewBox="0 0 1500 1050">
+<defs>
+  <style>
+    .entity{fill:#f8fafc;stroke:#263445;stroke-width:2.5;rx:12}
+    .head{fill:#dbeafe;stroke:#263445;stroke-width:2.5}
+    .name{font: bold 22px Arial,sans-serif;fill:#102033}
+    .attr{font: 17px Arial,sans-serif;fill:#243447}
+    .line{stroke:#334155;stroke-width:2.4;fill:none}
+    .card{font:bold 17px Arial,sans-serif;fill:#0f172a}
+    .note{font:16px Arial,sans-serif;fill:#475569}
+    .title{font:bold 30px Arial,sans-serif;fill:#0f172a}
+  </style>
+</defs>
+<rect width="1500" height="1050" fill="#ffffff"/>
+<text x="750" y="48" text-anchor="middle" class="title">ER-модель інформаційної системи бібліотеки (Crow's Foot)</text>
+
+<!-- relationships behind entities -->
+<path class="line" d="M390 250 L520 250"/>
+<text x="400" y="232" class="card">1</text><text x="493" y="232" class="card">N</text>
+<path class="line" d="M760 250 L900 250"/>
+<text x="770" y="232" class="card">1</text><text x="872" y="232" class="card">N</text>
+<path class="line" d="M1080 380 L1080 520"/>
+<text x="1094" y="405" class="card">1</text><text x="1094" y="500" class="card">N</text>
+<path class="line" d="M650 380 L650 520"/>
+<text x="664" y="405" class="card">1</text><text x="664" y="500" class="card">N</text>
+<path class="line" d="M900 610 L760 610"/>
+<text x="875" y="592" class="card">1</text><text x="780" y="592" class="card">N</text>
+<path class="line" d="M390 250 L250 250 L250 520"/>
+<text x="265" y="270" class="card">1</text><text x="265" y="500" class="card">N</text>
+
+<!-- Book -->
+<rect class="entity" x="150" y="110" width="240" height="270"/>
+<rect class="head" x="150" y="110" width="240" height="48" rx="10"/>
+<text class="name" x="270" y="141" text-anchor="middle">КНИГА</text>
+<text class="attr" x="170" y="190">PK book_id: INT</text>
+<text class="attr" x="170" y="222">title: VARCHAR(200)</text>
+<text class="attr" x="170" y="254">ISBN: VARCHAR(20)</text>
+<text class="attr" x="170" y="286">year: SMALLINT</text>
+<text class="attr" x="170" y="318">publisher: VARCHAR(120)</text>
+<text class="attr" x="170" y="350">genre: VARCHAR(60)</text>
+
+<!-- BookAuthor -->
+<rect class="entity" x="520" y="110" width="240" height="270"/>
+<rect class="head" x="520" y="110" width="240" height="48" rx="10"/>
+<text class="name" x="640" y="141" text-anchor="middle">КНИГА_АВТОР</text>
+<text class="attr" x="540" y="195">PK, FK book_id: INT</text>
+<text class="attr" x="540" y="235">PK, FK author_id: INT</text>
+<text class="attr" x="540" y="275">role: VARCHAR(40)</text>
+<text class="note" x="540" y="330">Проміжна сутність</text>
+
+<!-- Author -->
+<rect class="entity" x="900" y="110" width="240" height="270"/>
+<rect class="head" x="900" y="110" width="240" height="48" rx="10"/>
+<text class="name" x="1020" y="141" text-anchor="middle">АВТОР</text>
+<text class="attr" x="920" y="195">PK author_id: INT</text>
+<text class="attr" x="920" y="235">first_name: VARCHAR(60)</text>
+<text class="attr" x="920" y="275">last_name: VARCHAR(60)</text>
+<text class="attr" x="920" y="315">birth_year: SMALLINT</text>
+
+<!-- Copy -->
+<rect class="entity" x="150" y="520" width="240" height="260"/>
+<rect class="head" x="150" y="520" width="240" height="48" rx="10"/>
+<text class="name" x="270" y="551" text-anchor="middle">ПРИМІРНИК</text>
+<text class="attr" x="170" y="605">PK copy_id: INT</text>
+<text class="attr" x="170" y="645">FK book_id: INT</text>
+<text class="attr" x="170" y="685">inventory_no: VARCHAR(30)</text>
+<text class="attr" x="170" y="725">condition: VARCHAR(30)</text>
+<text class="attr" x="170" y="765">status: VARCHAR(20)</text>
+
+<!-- Loan -->
+<rect class="entity" x="520" y="520" width="240" height="300"/>
+<rect class="head" x="520" y="520" width="240" height="48" rx="10"/>
+<text class="name" x="640" y="551" text-anchor="middle">ВИДАЧА</text>
+<text class="attr" x="540" y="605">PK loan_id: INT</text>
+<text class="attr" x="540" y="645">FK copy_id: INT</text>
+<text class="attr" x="540" y="685">FK reader_id: INT</text>
+<text class="attr" x="540" y="725">FK librarian_id: INT</text>
+<text class="attr" x="540" y="765">loan_date: DATE</text>
+<text class="attr" x="540" y="800">due_date, return_date: DATE</text>
+
+<!-- Reader -->
+<rect class="entity" x="900" y="520" width="240" height="260"/>
+<rect class="head" x="900" y="520" width="240" height="48" rx="10"/>
+<text class="name" x="1020" y="551" text-anchor="middle">ЧИТАЧ</text>
+<text class="attr" x="920" y="605">PK reader_id: INT</text>
+<text class="attr" x="920" y="645">first_name: VARCHAR(60)</text>
+<text class="attr" x="920" y="685">last_name: VARCHAR(60)</text>
+<text class="attr" x="920" y="725">phone: VARCHAR(20)</text>
+<text class="attr" x="920" y="765">email: VARCHAR(120)</text>
+
+<!-- Librarian -->
+<rect class="entity" x="1200" y="520" width="240" height="260"/>
+<rect class="head" x="1200" y="520" width="240" height="48" rx="10"/>
+<text class="name" x="1320" y="551" text-anchor="middle">БІБЛІОТЕКАР</text>
+<text class="attr" x="1220" y="605">PK librarian_id: INT</text>
+<text class="attr" x="1220" y="645">first_name: VARCHAR(60)</text>
+<text class="attr" x="1220" y="685">last_name: VARCHAR(60)</text>
+<text class="attr" x="1220" y="725">login: VARCHAR(50)</text>
+<text class="attr" x="1220" y="765">email: VARCHAR(120)</text>
+
+<path class="line" d="M760 670 L1200 670"/>
+<text x="785" y="652" class="card">N</text><text x="1170" y="652" class="card">1</text>
+
+<text x="150" y="875" class="note">Позначення: PK — первинний ключ; FK — зовнішній ключ.</text>
+<text x="150" y="905" class="note">Кожен примірник належить одній книзі; кожна видача стосується одного примірника, одного читача та одного бібліотекаря.</text>
+<text x="150" y="935" class="note">Зв'язок КНИГА ↔ АВТОР є M:N і реалізований через проміжну сутність КНИГА_АВТОР.</text>
+</svg>
